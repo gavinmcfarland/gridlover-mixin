@@ -1,0 +1,30 @@
+body {
+  font-size: 14px;
+  line-height: 18.662px;
+}
+p,
+ul,
+ol {
+  font-size: 14px;
+  line-height: 18.662px;
+  margin-top: 0px;
+  margin-bottom: 21px;
+}
+h1 {
+  font-size: 149.296px;
+  line-height: 168px;
+  margin-top: 21px;
+  margin-bottom: 42px;
+}
+h2 {
+  font-size: 37.324px;
+  line-height: 42px;
+  margin-top: 42px;
+  margin-bottom: 21px;
+}
+h3 {
+  font-size: 18.662px;
+  line-height: 21px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+}
