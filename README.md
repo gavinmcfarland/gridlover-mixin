@@ -1,7 +1,7 @@
-Gridlover Mixins
-================
+Gridlover Mixin
+===============
 
-I built these mixing (currently just the Stylus mixin) to help generate CSS files inspired by Gridlover's tool to generate stylesheets that have typography with modular scale and vertical rhythm. These mixins only support the hard work Tuomas Jomppanen & Ville Vanninen have already done at [www.gridlover.net](http://www.gridlover.net), be sure to check it out.
+I built this mixin (currently just the Stylus mixin) to help generate CSS files inspired by Gridlover's tool. To create typography with modular scale and vertical rhythm. These mixins only suppliment the hard work Tuomas Jomppanen & Ville Vanninen have already done at [www.gridlover.net](http://www.gridlover.net), be sure to check it out.
 
 ## Setup
 
