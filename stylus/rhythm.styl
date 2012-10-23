@@ -1,0 +1,15 @@
+// Mixins
+
+rhythm(font-scale, margin-before = null, margin-after = null)
+	if font-scale == 0 and margin-before == null and margin-after == null
+		font-size: body-font-size
+		line-height scale-factor * body-font-size
+	else
+		if font-scale == 0
+			font-size: body-font-size
+			line-height scale-factor * body-font-size
+		else
+			font-size new-font-size = (body-font-size * scale-factor) * (2 ** (font-scale - 1))	
+			line-height ceil((new-font-size / (body-line-height * body-font-size))) * (body-line-height * body-font-size)
+		margin-top body-font-size * (body-line-height * margin-before)
+		margin-bottom body-font-size * (body-line-height * margin-after)		
