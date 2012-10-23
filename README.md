@@ -17,5 +17,5 @@ Then update the values of `body-font-size`, `body-line-height`, `scale-factor` s
 	h1
 		rhythm(4, 1, 2)
 
-Now configure each typographical element to have vertical rhythm. Arguments should be passed through as scale, margin-before, margin-after. Please see the example stylesheet for a reference.
+Now configure each typographical element to have vertical rhythm. Arguments should be passed through as the font scale, margin before the element and margin after the element. Please see the example stylesheet for a reference.
 
