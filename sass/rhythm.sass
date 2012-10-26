@@ -1,0 +1,29 @@
+// Sass exponent support
+@function exponent($base, $exponent)
+	// reset value
+	$value: $base
+	// positive intergers get multiplied
+	@if $exponent > 1
+		@for $i from 2 through $exponent
+			$value: $value * $base
+	// negitive intergers get divided. A number divided by itself is 1
+	@if $exponent < 1
+		@for $i from 0 through -$exponent
+			$value: $value / $base
+	// return the last value written
+	@return ($value)
+
+@mixin rhythm($scale, $before: 0, $after: 0)
+	@if $scale == 0 and $before == 0 and $after == 0
+		font-size: $body-font-size
+		line-height: $body-font-size * $body-line-height
+	@else
+		@if $scale == 0
+			font-size: $body-font-size
+			line-height: $body-font-size * $body-line-height
+		@else
+			$new-font-size: round($body-font-size * exponent($scale-factor, $scale))
+			font-size: $new-font-size
+			line-height: ceil(($new-font-size / ($body-line-height * $body-font-size))) * ($body-line-height * $body-font-size)
+		margin-top: $body-font-size * ($body-line-height * $before)
+		margin-bottom: $body-font-size * ($body-line-height * $after)
