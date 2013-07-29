@@ -1,0 +1,23 @@
+.rhythm(@font-scale, @margin-top : false, @margin-bottom : false)
+when (@font-scale > 0) {
+	@new-font-size: round(@body-font-size * pow(@scale-factor, @font-scale));
+	font-size: @new-font-size;
+	line-height: ceil((@new-font-size / (@body-line-height * @body-font-size))) * (@body-line-height * @body-font-size);
+}
+
+.rhythm(@font-scale, @margin-top : false, @margin-bottom : false)
+when (@font-scale = 0) {
+	@new-font-size: round(@body-font-size * pow(@scale-factor, @font-scale));
+	font-size: @new-font-size;
+	line-height: ceil((@new-font-size / (@body-line-height * @body-font-size))) * (@body-line-height * @body-font-size);
+}
+
+.rhythm(@font-scale, @margin-top : false, @margin-bottom : false)
+when (isnumber(@margin-top)) {
+	margin-top: @body-font-size * (@body-line-height * @margin-top);
+}
+
+.rhythm(@font-scale, @margin-top : false, @margin-bottom : false)
+when (isnumber(@margin-bottom)) {
+	margin-bottom: @body-font-size * (@body-line-height * @margin-bottom);
+}
