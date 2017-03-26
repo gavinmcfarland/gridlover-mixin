@@ -1,15 +1,94 @@
-// Mixins
+default-line-height = $base-font-size * $line-height-scale
 
-rhythm(font-scale, margin-before = null, margin-after = null)
-	if font-scale == 0 and margin-before == null and margin-after == null
-		font-size: body-font-size
-		line-height body-font-size * body-line-height
+
+convert-units(units)
+	if $unit == "em"
+		unit(units, em)
+
+	else if $unit == "rem"
+		unit(units, rem)
+
+	else if $unit == "pxrem"
+		unit(units, rem)
+
 	else
-		if font-scale == 0
-			font-size: body-font-size
-			line-height body-font-size * body-line-height
+		unit(units, px)
+
+
+calc-font-size(font-size)
+	if $unit == "em"
+		unit(font-size / $base-font-size, em)
+
+	else if $unit == "rem"
+		convert-units(font-size / $base-font-size)
+
+	else if $unit == "pxrem"
+		add-property('font-size', unit(font-size, px))
+		convert-units(font-size / $base-font-size)
+
+	else
+		unit(font-size, px)
+
+
+calc-line-height(font-size, line-height-multiplier = null)
+	line-height-multiplier ?  number-of-lines = line-height-multiplier : number-of-lines = ceil(font-size / default-line-height)
+
+
+	if $unit == "em"
+		convert-units(number-of-lines * default-line-height / font-size)
+
+	else if $unit == "rem"
+		convert-units(number-of-lines * default-line-height / $base-font-size)
+
+	else if $unit == "pxrem"
+		add-property('line-height', unit(number-of-lines * default-line-height, px))
+		convert-units(number-of-lines * default-line-height / $base-font-size)
+
+	else
+		convert-units(number-of-lines * default-line-height)
+
+
+calc-margin(margin, font-size)
+	if $unit == "em"
+		unit((default-line-height * margin) / font-size, em)
+
+	else if $unit == "rem"
+		unit((default-line-height * margin) / $base-font-size, rem)
+
+	else if $unit == "pxrem"
+		add-property(current-property, unit(default-line-height * margin, px))
+		unit((default-line-height * margin) / $base-font-size, rem)
+
+	else
+		default-line-height * margin
+
+
+rhythm(font-size-multiplier = null, margin-top = null, margin-bottom = null, line-height-multiplier = null)
+	if $true-scale == true
+		if font-size-multiplier == 0
+			font-size-multiplier = 0
 		else
-			font-size new-font-size = round(body-font-size * (scale-factor ** font-scale))
-			line-height ceil((new-font-size / (body-line-height * body-font-size))) * (body-line-height * body-font-size)
-		margin-top body-font-size * (body-line-height * margin-before)
-		margin-bottom body-font-size * (body-line-height * margin-after)		
+			font-size-multiplier = font-size-multiplier - 1
+
+	font-size = round($base-font-size * ($scale-factor ** font-size-multiplier))
+
+	if font-size-multiplier >= 0
+		if font-size-multiplier == 0
+			font-size: calc-font-size(font-size)
+			if line-height-multiplier
+				line-height: calc-line-height(font-size, line-height-multiplier)
+			else
+				line-height: calc-line-height(font-size)
+
+		else
+			font-size: calc-font-size(font-size)
+			if line-height-multiplier
+				line-height: calc-line-height(font-size, line-height-multiplier)
+			else
+				line-height: calc-line-height(font-size)
+
+	if margin-top
+		margin-top: calc-margin(margin-top, font-size)
+
+	if margin-bottom
+		margin-bottom calc-margin(margin-bottom, font-size)
