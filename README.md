@@ -55,6 +55,14 @@ p {
 
 Change the default configuration for your project inside the **config** file.
 
+- `$unit` Set which unit you would like the measurements to be output to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`.
+- `$base-font-size` Set to the font size of your body copy. All typographical elements are calculated from this base font size.
+- `$line-height-scale` Set the scale for the vertical rhythm of your typography.
+- `$scale-factor` Set the scale for the relationship of font sizes between each typographical element.
+- `$true-scale` Set to `true` if you would prefer the font size to be a direct multiple of the `font-size` multiplier.
+
+Example
+
 ```stylus
 $unit = "px"
 $base-font-size = 16px
@@ -62,25 +70,8 @@ $line-height-scale = 1.5
 $scale-factor = 1.5
 $true-scale = false
 ```
-### Unit
 
-Set which unit you would like the measurements to be output to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`.
 
-### Base font size
-
-Set to the font size of your body copy. All typographical elements are calculated from this base font size.
-
-### Line height scale
-
-Set the scale for the vertical rhythm of your typography.
-
-### Scale factor
-
-Set the scale for the relationship of font sizes between each typographical element.
-
-### True scale
-
-Set to `true` if you would prefer the font size to be a direct multiple of the `font-size` multiplier.
 
 ## Changelog
 
@@ -115,7 +106,7 @@ Set to `true` if you would prefer the font size to be a direct multiple of the `
 
 ## Special thanks
 
-Thanks for:
+Thanks to:
 
 - [k9ordon](https://github.com/k9ordon) for adding LESS support
 - [brunowego](https://github.com/brunowego) for adding Bower support
