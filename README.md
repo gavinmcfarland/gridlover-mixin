@@ -75,7 +75,7 @@ $true-scale = false
 
 ## Changelog
 
-### v1.4.0 (November 14th 2016)
+### v1.4.0 (Mar 26th 2016)
 
 - Refactored Stylus mixin
 - Added support for, `em`, `rem`, `pxrem`
