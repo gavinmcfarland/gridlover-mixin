@@ -5,15 +5,23 @@ I built this mixin to help generate CSS files inspired by Gridlover's tool which
 
 ## Setup
 
-Add the following file to your main stylesheet.
+Add the following file to the top of your main stylesheet. The examples below use Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
 
-	@import 'rhythm'
+```
+// Configure variables here
+$unit = "px"
+$base-font-size = 16px
+$line-height-scale = 1.5
+$scale-factor = 1.5
 
-Then update values like `base-font-size`, `line-height-scale`, `scale-factor` stored inside the **config** file to your liking.
+@import 'rhythm'
+```
+
+Then update the configuration values to your liking. More details about configuration variables below.
 
 ## Usage
 
-Use the `rhythm()` mixin to set the vertical rhythm of each typographical element.
+Use the `rhythm` mixin to set the vertical rhythm of each typographical element.
 
 Arguments should be passed through as the font-size multiplier, margin-top multiplier, margin-bottom multiplier.
 
@@ -47,15 +55,15 @@ For example
 
 ```stylus
 p {
-	rhythm: 2, 1, 1, 4
+	rhythm: 0, 1, 1, 2 // each line of text will span two line heights
 }
 ```
 
 ## Configure
 
-Change the default configuration for your project inside the **config** file.
+Change the default configuration for your project using the following variables.
 
-- `$unit` Set which unit you would like the measurements to be output to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`.
+- `$unit` Set which unit you would like the measurements to be outputted to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`. `pxrem` includes a pixel fallback.
 - `$base-font-size` Set to the font size of your body copy. All typographical elements are calculated from this base font size.
 - `$line-height-scale` Set the scale for the vertical rhythm of your typography.
 - `$scale-factor` Set the scale for the relationship of font sizes between each typographical element.
@@ -64,11 +72,11 @@ Change the default configuration for your project inside the **config** file.
 Example
 
 ```stylus
-$unit = "px"
-$base-font-size = 16px
+$unit = "rem"
+$base-font-size = 14px
 $line-height-scale = 1.5
-$scale-factor = 1.5
-$true-scale = false
+$scale-factor = 1.618
+$true-scale = true
 ```
 
 
