@@ -7,7 +7,7 @@ I built this mixin to help generate CSS files inspired by Gridlover's tool which
 
 Add the following file to the top of your main stylesheet. The examples below use Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
 
-```
+```stylus
 // Configure variables here
 $unit = "px"
 $base-font-size = 16px
