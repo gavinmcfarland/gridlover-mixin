@@ -5,7 +5,11 @@ I built this mixin to help generate CSS files inspired by Gridlover's tool which
 
 ## Setup
 
-Add the following file to the top of your main stylesheet. The example below uses Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
+Install the appropriate [Stlyus](https://github.com/stylus/stylus), [SASS](https://github.com/sass/sass), or [LESS](https://github.com/less/less.js) preprocessor.
+
+Add the correct `rhythm` mixin file to your project.
+
+Then add the following file to the top of your main stylesheet. The example below uses Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
 
 ```stylus
 // Configure variables here
@@ -24,8 +28,6 @@ html {
 	rhythm: "base"
 }
 ```
-
-Then update the configuration values to your liking. More details about configuration variables below.
 
 ## Usage
 
