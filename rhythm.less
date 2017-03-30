@@ -1,0 +1,107 @@
+// Not sure how to do this in LESS
+// @true-scale: true;
+// 	if @true-scale
+// 		if(@font-size-multiplier == 1, @font-size-multiplier: 0, @font-size-multiplier: @font-size-multiplier - 1)
+
+// Also not sure how to support custom-line-count without having to duplicate all the mixins again
+
+@base-line-height: @base-font-size * @line-height-scale;
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier = "base") {
+
+	font-size: @base-font-size;
+	line-height: @base-line-height;
+}
+
+// If font-size-multiplier is provided
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier >= 0) and (@unit = "px"),
+	     (@font-size-multiplier >= 0) and (@unit = "pxrem") {
+
+	@local-font-scale: pow(@font-scale, @font-size-multiplier);
+	@local-font-size: @base-font-size * @local-font-scale;
+	@local-line-count: ceil(@local-font-size / @base-line-height);
+	@local-line-height: @local-line-count * @base-line-height;
+	font-size: @local-font-size;
+	line-height: @local-line-height;
+}
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier >= 0) and (@unit = "em") {
+
+	@local-font-scale: pow(@font-scale, @font-size-multiplier);
+	@local-font-size: @base-font-size * @local-font-scale;
+	@local-line-count: ceil(@local-font-size / @base-line-height);
+	@local-line-height: @local-line-count * @base-line-height;
+	font-size: (@local-font-size / @base-font-size) * 1em;
+	line-height: (@local-line-height / @local-font-size) * 1em;
+}
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier >= 0) and (@unit = "rem"),
+	     (@font-size-multiplier >= 0) and (@unit = "pxrem") {
+
+	@local-font-scale: pow(@font-scale, @font-size-multiplier);
+	@local-font-size: @base-font-size * @local-font-scale;
+	@local-line-count: ceil(@local-font-size / @base-line-height);
+	@local-line-height: @local-line-count * @base-line-height;
+	font-size: (@local-font-size / @base-font-size) * 1rem;
+	line-height: (@local-line-height / @base-font-size) * 1rem;
+}
+
+// If margin-top-multiplier is provided
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @custom-line-count: false)
+	when (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "px"),
+	     (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "pxrem") {
+
+	margin-top: @base-line-height * @margin-top-multiplier;
+}
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "em") {
+
+	@local-font-scale: pow(@font-scale, @font-size-multiplier);
+	@local-font-size: @base-font-size * @local-font-scale;
+	@local-line-count: ceil(@local-font-size / @base-line-height);
+	@local-line-height: @local-line-count * @base-line-height;
+	@converted-line-height: (@base-line-height / @local-font-size) * 1em;
+	margin-top: @converted-line-height * @margin-top-multiplier;
+}
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "rem"),
+	     (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "pxrem") {
+
+	@converted-line-height: (@base-line-height / @base-font-size) * 1rem;
+	margin-top: @converted-line-height * @margin-top-multiplier;
+}
+
+// If margin-bottom-multiplier is provided
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @custom-line-count: false)
+	when (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "px"),
+	     (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "pxrem") {
+	margin-bottom: @base-line-height * @margin-bottom-multiplier;
+}
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "em") {
+
+	@local-font-scale: pow(@font-scale, @font-size-multiplier);
+	@local-font-size: @base-font-size * @local-font-scale;
+	@local-line-count: ceil(@local-font-size / @base-line-height);
+	@local-line-height: @local-line-count * @base-line-height;
+	@converted-line-height: (@base-line-height / @local-font-size) * 1em;
+	margin-bottom: @converted-line-height * @margin-bottom-multiplier;
+}
+
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "rem"),
+	     (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "pxrem") {
+
+	@converted-line-height: (@base-line-height / @base-font-size) * 1rem;
+	margin-bottom: @converted-line-height * @margin-bottom-multiplier;
+}

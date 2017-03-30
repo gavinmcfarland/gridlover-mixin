@@ -1,0 +1,59 @@
+// Work out what the base line-height is in pixels
+$base-line-height = $base-font-size * $line-height-scale
+
+rhythm($font-size-multiplier, $margin-top-multiplier = false, $margin-bottom-multiplier = false, $line-count = false)
+
+	if $font-size-multiplier == "base"
+		font-size: $base-font-size
+		line-height: $base-line-height
+
+	else
+		if $true-scale
+			$font-size-multiplier <= 1 ? $font-size-multiplier = 0 : $font-size-multiplier = $font-size-multiplier - 1
+
+		$local-font-scale = $font-scale ** $font-size-multiplier
+		$local-font-size = $base-font-size * $local-font-scale
+		$local-line-count = $line-count ? $line-count : ceil(unit($local-font-size / $base-line-height, ''))
+		$local-line-height = $local-line-count * $base-line-height
+
+		// Values calculated in pixels
+		$computed = {}
+
+		// Values calculated in ems, or rems
+		$converted = {}
+
+		if $unit == "px" || $unit == "pxrem"
+			$computed['font-size'] = $local-font-size
+			$computed['line-height'] = $local-line-height
+			if $margin-top-multiplier
+				$computed['margin-top'] = $base-line-height * $margin-top-multiplier
+			if $margin-bottom-multiplier
+				$computed['margin-bottom'] = $base-line-height * $margin-bottom-multiplier
+
+		if $unit == "em"
+			$converted['font-size'] = $local-font-size / $base-font-size
+			$converted['line-height'] = $local-line-height / $local-font-size
+			if $margin-top-multiplier
+				$converted['margin-top'] = ($base-line-height / $local-font-size) * $margin-top-multiplier
+			if $margin-bottom-multiplier
+				$converted['margin-bottom'] = ($base-line-height / $local-font-size) * $margin-bottom-multiplier
+
+		if $unit == "rem" || $unit == "pxrem"
+			$converted['font-size'] = $local-font-size / $base-font-size
+			$converted['line-height'] = $local-line-height / $base-font-size
+			if $margin-top-multiplier
+				$converted['margin-top'] = ($base-line-height / $base-font-size) * $margin-top-multiplier
+			if $margin-bottom-multiplier
+				$converted['margin-bottom'] = ($base-line-height / $base-font-size) * $margin-bottom-multiplier
+
+		// If unit is "pxrem" then set unit to "rem" for correct output
+		$unit == "pxrem" ? $unit = "rem" : $unit = $unit
+
+		// Output any computed values
+		for $prop in $computed
+			add-property($prop, $computed[$prop])
+
+		// Output any converted values and append correct unit
+		for $prop in $converted
+			$converted[$prop] = unit($converted[$prop], $unit)
+			add-property($prop, $converted[$prop])

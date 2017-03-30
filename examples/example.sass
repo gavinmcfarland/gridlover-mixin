@@ -1,0 +1,28 @@
+$unit: "pxrem"
+$base-font-size: 16px
+$line-height-scale: 1.5
+$font-scale: 1.5
+$true-scale: false
+
+@import 'rhythm'
+
+html
+	@include rhythm("base")
+
+body
+	@include rhythm(0)
+
+h1
+	@include rhythm(3, 1, 2)
+
+h2
+	@include rhythm(2, 1, 1)
+
+h3
+	@include rhythm(1, 1)
+
+h4
+	@include rhythm(0, 1)
+
+p, ul, ol
+	@include rhythm(0, 0, 1, 2)

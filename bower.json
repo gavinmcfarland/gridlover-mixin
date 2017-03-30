@@ -1,6 +1,6 @@
 {
   "name": "gridlover-mixin",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "homepage": "https://github.com/sevenupcan/gridlover-mixin",
   "description": "A mixin to generate modular scale and vertical rhythm for your typography",
   "license": "MIT",
