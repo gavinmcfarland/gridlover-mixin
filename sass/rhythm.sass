@@ -1,5 +1,5 @@
-// Sass exponent support
-@function exponent($base, $exponent)
+// Support for power of
+@function pow($base, $exponent)
 	// reset value
 	$value: $base
 	// positive intergers get multiplied
@@ -13,17 +13,43 @@
 	// return the last value written
 	@return ($value)
 
-@mixin rhythm($scale, $before: 0, $after: 0)
-	@if $scale == 0 and $before == 0 and $after == 0
-		font-size: $body-font-size
-		line-height: $body-font-size * $body-line-height
-	@else
-		@if $scale == 0
-			font-size: $body-font-size
-			line-height: $body-font-size * $body-line-height
-		@else
-			$new-font-size: round($body-font-size * exponent($scale-factor, $scale))
-			font-size: $new-font-size
-			line-height: ceil(($new-font-size / ($body-line-height * $body-font-size))) * ($body-line-height * $body-font-size)
-		margin-top: $body-font-size * ($body-line-height * $before)
-		margin-bottom: $body-font-size * ($body-line-height * $after)
+
+@mixin rhythm($font-size-multiplier, $margin-top-multiplier: 0, $margin-bottom-multiplier: 0, $line-count: null)
+
+	@if $true-scale
+		$font-size-multiplier: if($font-size-multiplier <= 1, 0, $font-size-multiplier - 1)
+
+	// Work out what the base line-height is in pixels
+	$base-line-height: $base-font-size * $line-height-scale
+
+	$local-font-scale: pow($font-scale, $font-size-multiplier)
+	$local-font-size: $base-font-size * $local-font-scale
+	$local-line-count: if($line-count, $line-count, ceil($local-font-size / $base-line-height))
+	$local-line-height: $local-line-count * $base-line-height
+
+	@if $unit == "px" or $unit == "pxrem"
+		font-size: $local-font-size
+		line-height: $local-line-height
+		@if $margin-top-multiplier > 0
+			margin-top: $base-line-height * $margin-top-multiplier
+		@if $margin-bottom-multiplier > 0
+			margin-bottom: $base-line-height * $margin-bottom-multiplier
+
+	@if $unit == "em"
+		$converted-line-height: ($base-line-height / $local-font-size) * 1em
+		font-size: ($local-font-size / $base-font-size) * 1em
+		line-height: ($local-line-height / $local-font-size) * 1em
+		@if $margin-top-multiplier > 0
+			margin-top: $converted-line-height * $margin-top-multiplier
+		@if $margin-bottom-multiplier > 0
+			margin-bottom: $converted-line-height * $margin-bottom-multiplier
+
+
+	@if $unit == "rem" or $unit == "pxrem"
+		$converted-line-height: ($base-line-height / $base-font-size) * 1rem
+		font-size: ($local-font-size / $base-font-size) * 1rem
+		line-height: ($local-line-height / $base-font-size) * 1rem
+		@if $margin-top-multiplier > 0
+			margin-top: $converted-line-height * $margin-top-multiplier
+		@if $margin-bottom-multiplier > 0
+			margin-bottom: $converted-line-height * $margin-bottom-multiplier

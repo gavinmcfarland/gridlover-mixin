@@ -5,9 +5,9 @@ I built this mixin to help generate CSS files inspired by Gridlover's tool which
 
 ## Setup
 
-Add the following file to the top of your main stylesheet. The examples below use Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
+Add the following file to the top of your main stylesheet. The examples below uses Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
 
-```
+```stylus
 // Configure variables here
 $unit = "px"
 $base-font-size = 16px
@@ -49,7 +49,7 @@ h1 {
 ```
 
 ### Custom line-height
-By default the mixin calculates the appropriate line-height based on the computed font-size however if you wish to set this explicitly you can define it as the last argument in the mixin.
+By default the mixin calculates the appropriate line-height based on the computed font-size however if you wish to set this explicitly you can define it as the last argument in the mixin (unfortunately this feature only works in SASS and Stylus currently).
 
 For example
 
@@ -63,11 +63,11 @@ p {
 
 Change the default configuration for your project using the following variables.
 
-- `$unit` Set which unit you would like the measurements to be outputted to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`. `pxrem` includes a pixel fallback.
+- `$unit` Set which unit you would like the measurements to be outputted to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`. Use `pxrem` when you want rems with a pixel fallback.
 - `$base-font-size` Set to the font size of your body copy. All typographical elements are calculated from this base font size.
 - `$line-height-scale` Set the scale for the vertical rhythm of your typography.
 - `$scale-factor` Set the scale for the relationship of font sizes between each typographical element.
-- `$true-scale` Set to `true` if you would prefer the font size to be a direct multiple of the `font-size` multiplier.
+- `$true-scale` Set to `true` if you would prefer the font size to be a direct multiple of the `font-size` multiplier (unfortunately this feature only works in SASS and Stylus currently).
 
 Example
 
@@ -83,7 +83,11 @@ $true-scale = true
 
 ## Changelog
 
-### v1.4.0 (Mar 26th 2016)
+### v1.5.0 (Mar 30 2016)
+
+- Upgraded SASS and LESS mixin
+
+### v1.4.0 (Mar 26 2016)
 
 - Refactored Stylus mixin
 - Added support for, `em`, `rem`, `pxrem`

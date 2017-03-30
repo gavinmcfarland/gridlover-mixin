@@ -1,93 +1,54 @@
-default-line-height = $base-font-size * $line-height-scale
+rhythm($font-size-multiplier, $margin-top-multiplier = false, $margin-bottom-multiplier = false, $line-count = false)
 
-convert-units(units)
-	if $unit == "em"
-		unit(units, em)
+	if $true-scale
+		$font-size-multiplier <= 1 ? $font-size-multiplier = 0 : $font-size-multiplier = $font-size-multiplier - 1
 
-	else if $unit == "rem"
-		unit(units, rem)
+	// Work out what the base line-height is in pixels
+	$base-line-height = $base-font-size * $line-height-scale
 
-	else if $unit == "pxrem"
-		unit(units, rem)
+	$local-font-scale = $font-scale ** $font-size-multiplier
+	$local-font-size = $base-font-size * $local-font-scale
+	$local-line-count = $line-count ? $line-count : ceil(unit($local-font-size / $base-line-height, ''))
+	$local-line-height = $local-line-count * $base-line-height
 
-	else
-		unit(units, px)
+	// Values calculated in pixels
+	$computed = {}
 
+	// Values calculated in ems, or rems
+	$converted = {}
 
-calc-font-size(font-size)
-	if $unit == "em"
-		unit(font-size / $base-font-size, em)
-
-	else if $unit == "rem"
-		convert-units(font-size / $base-font-size)
-
-	else if $unit == "pxrem"
-		add-property('font-size', unit(font-size, px))
-		convert-units(font-size / $base-font-size)
-
-	else
-		unit(font-size, px)
-
-
-calc-line-height(font-size, line-height-multiplier = null)
-	line-height-multiplier ?  number-of-lines = line-height-multiplier : number-of-lines = ceil(font-size / default-line-height)
-
+	if $unit == "px" || $unit == "pxrem"
+		$computed['font-size'] = $local-font-size
+		$computed['line-height'] = $local-line-height
+		if $margin-top-multiplier
+			$computed['margin-top'] = $base-line-height * $margin-top-multiplier
+		if $margin-bottom-multiplier
+			$computed['margin-bottom'] = $base-line-height * $margin-bottom-multiplier
 
 	if $unit == "em"
-		convert-units(number-of-lines * default-line-height / font-size)
+		$converted['font-size'] = $local-font-size / $base-font-size
+		$converted['line-height'] = $local-line-height / $local-font-size
+		if $margin-top-multiplier
+			$converted['margin-top'] = ($base-line-height / $local-font-size) * $margin-top-multiplier
+		if $margin-bottom-multiplier
+			$converted['margin-bottom'] = ($base-line-height / $local-font-size) * $margin-bottom-multiplier
 
-	else if $unit == "rem"
-		convert-units(number-of-lines * default-line-height / $base-font-size)
+	if $unit == "rem" || $unit == "pxrem"
+		$converted['font-size'] = $local-font-size / $base-font-size
+		$converted['line-height'] = $local-line-height / $base-font-size
+		if $margin-top-multiplier
+			$converted['margin-top'] = ($base-line-height / $base-font-size) * $margin-top-multiplier
+		if $margin-bottom-multiplier
+			$converted['margin-bottom'] = ($base-line-height / $base-font-size) * $margin-bottom-multiplier
 
-	else if $unit == "pxrem"
-		add-property('line-height', unit(number-of-lines * default-line-height, px))
-		convert-units(number-of-lines * default-line-height / $base-font-size)
+	// If unit is "pxrem" then set unit to "rem" for correct output
+	$unit == "pxrem" ? $unit = "rem" : $unit = $unit
 
-	else
-		convert-units(number-of-lines * default-line-height)
+	// Output any computed values
+	for $prop in $computed
+		add-property($prop, $computed[$prop])
 
-
-calc-margin(margin, font-size)
-	if $unit == "em"
-		unit((default-line-height * margin) / font-size, em)
-
-	else if $unit == "rem"
-		unit((default-line-height * margin) / $base-font-size, rem)
-
-	else if $unit == "pxrem"
-		add-property(current-property, unit(default-line-height * margin, px))
-		unit((default-line-height * margin) / $base-font-size, rem)
-
-	else
-		default-line-height * margin
-
-
-rhythm(font-size-multiplier = null, margin-top = null, margin-bottom = null, line-height-multiplier = null)
-	if $true-scale == true
-		if font-size-multiplier == 0
-			font-size-multiplier = 0
-		else
-			font-size-multiplier = font-size-multiplier - 1
-
-	font-size = round($base-font-size * ($scale-factor ** font-size-multiplier))
-
-	if font-size-multiplier >= 0
-		if font-size-multiplier == 0
-			font-size: calc-font-size(font-size)
-			if line-height-multiplier
-				line-height: calc-line-height(font-size, line-height-multiplier)
-			else
-				line-height: calc-line-height(font-size)
-
-		else
-			font-size: calc-font-size(font-size)
-			if line-height-multiplier
-				line-height: calc-line-height(font-size, line-height-multiplier)
-			else
-				line-height: calc-line-height(font-size)
-
-	if margin-top
-		margin-top: calc-margin(margin-top, font-size)
-
-	if margin-bottom
-		margin-bottom calc-margin(margin-bottom, font-size)
+	// Output any converted values and append correct unit
+	for $prop in $converted
+		$converted[$prop] = unit($converted[$prop], $unit)
+		add-property($prop, $converted[$prop])
