@@ -5,7 +5,7 @@ I built this mixin to help generate CSS files inspired by Gridlover's tool which
 
 ## Setup
 
-Add the following file to the top of your main stylesheet. The examples below uses Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
+Add the following file to the top of your main stylesheet. The example below uses Stylus, so be sure to change the syntax to match your chosen CSS preprocessor.
 
 ```stylus
 // Configure variables here
@@ -15,6 +15,14 @@ $line-height-scale = 1.5
 $scale-factor = 1.5
 
 @import 'rhythm'
+```
+
+If you are using ems or rems, then you will want to set the base rhythm of your document using the following.
+
+```stylus
+html {
+	rhythm: "base"
+}
 ```
 
 Then update the configuration values to your liking. More details about configuration variables below.
@@ -63,7 +71,7 @@ p {
 
 Change the default configuration for your project using the following variables.
 
-- `$unit` Set which unit you would like the measurements to be outputted to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`. Use `pxrem` when you want rems with a pixel fallback.
+- `$unit` Set which unit you would like the measurements to be outputted to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`. Use `"pxrem"` when you want rems with a pixel fallback.
 - `$base-font-size` Set to the font size of your body copy. All typographical elements are calculated from this base font size.
 - `$line-height-scale` Set the scale for the vertical rhythm of your typography.
 - `$scale-factor` Set the scale for the relationship of font sizes between each typographical element.

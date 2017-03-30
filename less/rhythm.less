@@ -7,11 +7,18 @@
 
 @base-line-height: @base-font-size * @line-height-scale;
 
+.rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
+	when (@font-size-multiplier = "base") {
+
+	font-size: @base-font-size;
+	line-height: @base-line-height;
+}
+
 // If font-size-multiplier is provided
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
-	when (@unit = "px"),
-	     (@unit = "pxrem") {
+	when (@font-size-multiplier >= 0) and (@unit = "px"),
+	     (@font-size-multiplier >= 0) and (@unit = "pxrem") {
 
 	@local-font-scale: pow(@font-scale, @font-size-multiplier);
 	@local-font-size: @base-font-size * @local-font-scale;
@@ -22,7 +29,7 @@
 }
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
-	when (@unit = "em") {
+	when (@font-size-multiplier >= 0) and (@unit = "em") {
 
 	@local-font-scale: pow(@font-scale, @font-size-multiplier);
 	@local-font-size: @base-font-size * @local-font-scale;
@@ -33,8 +40,8 @@
 }
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
-	when (@unit = "rem"),
-	     (@unit = "pxrem") {
+	when (@font-size-multiplier >= 0) and (@unit = "rem"),
+	     (@font-size-multiplier >= 0) and (@unit = "pxrem") {
 
 	@local-font-scale: pow(@font-scale, @font-size-multiplier);
 	@local-font-size: @base-font-size * @local-font-scale;
@@ -47,14 +54,14 @@
 // If margin-top-multiplier is provided
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @custom-line-count: false)
-	when (@margin-top-multiplier > 0) and (@unit = "px"),
-	     (@margin-top-multiplier > 0) and (@unit = "pxrem") {
+	when (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "px"),
+	     (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "pxrem") {
 
 	margin-top: @base-line-height * @margin-top-multiplier;
 }
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
-	when (@margin-top-multiplier > 0) and (@unit = "em") {
+	when (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "em") {
 
 	@local-font-scale: pow(@font-scale, @font-size-multiplier);
 	@local-font-size: @base-font-size * @local-font-scale;
@@ -65,8 +72,8 @@
 }
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
-	when (@margin-top-multiplier > 0) and (@unit = "rem"),
-	     (@margin-top-multiplier > 0) and (@unit = "pxrem") {
+	when (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "rem"),
+	     (@font-size-multiplier >= 0) and (@margin-top-multiplier > 0) and (@unit = "pxrem") {
 
 	@converted-line-height: (@base-line-height / @base-font-size) * 1rem;
 	margin-top: @converted-line-height * @margin-top-multiplier;
@@ -75,13 +82,13 @@
 // If margin-bottom-multiplier is provided
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @custom-line-count: false)
-	when (@margin-bottom-multiplier > 0) and (@unit = "px"),
-	     (@margin-bottom-multiplier > 0) and (@unit = "pxrem") {
+	when (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "px"),
+	     (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "pxrem") {
 	margin-bottom: @base-line-height * @margin-bottom-multiplier;
 }
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
-	when (@margin-bottom-multiplier > 0) and (@unit = "em") {
+	when (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "em") {
 
 	@local-font-scale: pow(@font-scale, @font-size-multiplier);
 	@local-font-size: @base-font-size * @local-font-scale;
@@ -92,8 +99,8 @@
 }
 
 .rhythm(@font-size-multiplier, @margin-top-multiplier: false, @margin-bottom-multiplier: false, @line-count: false)
-	when (@margin-bottom-multiplier > 0) and (@unit = "rem"),
-	     (@margin-bottom-multiplier > 0) and (@unit = "pxrem") {
+	when (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "rem"),
+	     (@font-size-multiplier >= 0) and (@margin-bottom-multiplier > 0) and (@unit = "pxrem") {
 
 	@converted-line-height: (@base-line-height / @base-font-size) * 1rem;
 	margin-bottom: @converted-line-height * @margin-bottom-multiplier;
