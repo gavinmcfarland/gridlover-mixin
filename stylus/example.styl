@@ -1,16 +1,31 @@
-$unit = "px"
+$unit = "rem"
 $base-font-size = 16px
 $line-height-scale = 1.5
-$scale-factor = 1.5
+$font-scale = 1.5
 $true-scale = false
 
 @import 'rhythm'
 
-p
-	rhythm(0, 1, 1)
+body
+	rhythm: 0
+	/* Should output font-size and line-height only, should be equal to default font-size and line-height */
+
 h1
-	rhythm(3, 1, 1)
+	rhythm: 1, 0, 0
+	/* Should output font-size and line-height only */
+
 h2
-	rhythm(2, 2, 2)
+	rhythm: 2, 1
+	/* Should output font-size, line-height and margin-top */
+
 h3
-	rhythm(1, 3, 3)
+	rhythm: 3, 2, 2
+	/* Should output font-size, line-height and margin-top and margin-bottom */
+
+h4
+	rhythm: 0, 0, 3
+	/* Should output font-size, line-height and margin-bottom */
+
+h5
+	rhythm: 4, 0, 0, 2
+	/* Should output custom line height */
