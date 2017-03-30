@@ -5,7 +5,7 @@ I built this mixin to help generate CSS files inspired by Gridlover's tool which
 
 ## Setup
 
-Install the appropriate [Stlyus](https://github.com/stylus/stylus), [SASS](https://github.com/sass/sass), or [LESS](https://github.com/less/less.js) preprocessor.
+Install the appropriate [Stylus](https://github.com/stylus/stylus), [SASS](https://github.com/sass/sass), or [LESS](https://github.com/less/less.js) preprocessor.
 
 Add the correct `rhythm` mixin file to your project.
 
@@ -93,7 +93,7 @@ $true-scale = true
 
 ## Changelog
 
-### v1.5.0 (Mar 30 2016)
+### v2.0.0 (Mar 30 2016)
 
 - Upgraded SASS and LESS mixin
 
