@@ -16,7 +16,7 @@ Then add the following file to the top of your main stylesheet. The example belo
 $unit = "px"
 $base-font-size = 16px
 $line-height-scale = 1.5
-$scale-factor = 1.5
+$font-scale = 1.5
 
 @import 'rhythm'
 ```
@@ -76,7 +76,7 @@ Change the default configuration for your project using the following variables.
 - `$unit` Set which unit you would like the measurements to be outputted to. Choose from `"px"`, `"em"`, `"rem"`, or `"pxrem"`. Use `"pxrem"` when you want rems with a pixel fallback.
 - `$base-font-size` Set to the font size of your body copy. All typographical elements are calculated from this base font size.
 - `$line-height-scale` Set the scale for the vertical rhythm of your typography.
-- `$scale-factor` Set the scale for the relationship of font sizes between each typographical element.
+- `$font-scale` Set the scale for the relationship of font sizes between each typographical element.
 - `$true-scale` Set to `true` if you would prefer the font size to be a direct multiple of the `font-size` multiplier (unfortunately this feature only works in SASS and Stylus currently).
 
 Example
@@ -85,7 +85,7 @@ Example
 $unit = "rem"
 $base-font-size = 14px
 $line-height-scale = 1.5
-$scale-factor = 1.618
+$font-scale = 1.618
 $true-scale = true
 ```
 
